@@ -7,34 +7,38 @@
 - [Example Outputs](#example-outputs)
 
 ## Motivation
+Throughout my career, I’ve worked on complex web applications — particularly in the public sector — where services often involve numerous, branching workflows.
+In these environments, users must navigate through many screens, forms, and decision points to complete a process.
+This complexity naturally carries over to the development side, especially when writing acceptance tests using tools like Selenium.
 
-Throughout my career, I’ve worked on complex web applications — particularly in the public sector — where services often involve numerous, branching workflows. In these environments, users must navigate through many screens, forms, and decision points to complete a process. This complexity naturally extends to the development side, especially when writing acceptance tests using tools like Selenium.
+A recurring challenge I’ve noticed is that knowledge embedded in legacy test logic can be hard to trace over time.
+As with application code, I believe knowledge should be scalable — if it only lives inside someone’s head or in outdated documentation, it risks being lost.
+Confluence pages, for instance, are often created with the best intentions but can quickly fall out of sync with the reality of a fast-moving project.
+This can make it especially difficult for new team members trying to understand how a feature works.
 
-One recurring challenge I’ve observed is knowledge loss and difficulty navigating legacy test logic. I’ve always said that, like applications, knowledge must be scalable — and if it lives only inside someone’s head, it isn’t. One of the most frustrating (and oddly common) situations is when documentation exists on Confluence but hasn’t been updated in ages. It becomes unreliable — especially for new team members trying to understand how the application works.
+There are moments many developers will recognise, such as:
 
-I remember situations like:
+“Wasn’t there a checkbox for Feature A under some eligibility rule?”
+“Hmm, that might’ve been added a while back… I’m not sure. It might be in the tests, or you could try checking manually.”
 
-*“Hey, do you remember that checkbox for enabling Feature A? I think it’s under some eligibility condition...”
-“Hmm, that was added ages ago... I don’t really remember. You’ll have to dig through the tests or try it manually.”*
+Situations like these are understandable in complex systems, but they reveal a gap: when key contributors move on or context fades, edge cases and less-travelled paths in the application can become obscure.
+Developers are left piecing together clues from scattered test files or manually navigating the UI just to understand behaviour.
 
-Worse still, when a key developer leaves, entire areas of functionality — particularly edge cases or rarely used paths — become unclear or forgotten. Developers are left chasing scattered clues in test files, or manually clicking through the UI, just to figure out where a feature is used or how it behaves.
+Ideally, acceptance test reports could evolve into living documentation — searchable, visual, and easy to explore.
+I want to build a tool that moves in that direction: a reporting layer that not only captures screenshots during test execution, but also enables developers and testers to search by keyword, component, or scenario and quickly locate where a feature is exercised.
 
-In an ideal world, acceptance test reports would serve as living documentation — searchable, navigable, and rich in visual context. I want to build a tool that brings us closer to that: a reporting layer that not only captures screenshots during test execution, but also allows developers and testers to search by keyword, component, or scenario to instantly find where a feature is covered.
+This wouldn’t just help engineers. Stakeholders, too, could benefit from visual confirmation that key workflows are covered — making test results easier to interpret, trust, and communicate.
 
-I also see this tool benefiting stakeholders, providing visual confirmation that the application is behaving as expected — making test results easier to understand, trust, and communicate.
-
-Yes, you can search the code — but just like we use IDEs to streamline understanding and navigation, I want to bring that same power to acceptance tests.
-
+Yes, we can search the code or use an IDE to trace logic — but just as IDEs improve comprehension and navigation, we can bring similar capabilities to acceptance test artifacts.
 ## Project Overview
 
-The goal of this project is to build a custom [Scalatest](https://www.scalatest.org) [Reporter](https://www.scalatest.org/scaladoc/3.0.5/org/scalatest/Reporter.html)
+The goal of this project is to build a custom  [Scalatest](https://www.scalatest.org) [Reporter](https://www.scalatest.org/scaladoc/3.0.5/org/scalatest/Reporter.html) that captures all screenshots taken during automated tests of a web application. To enable this, the reporter should be used alongside [FeatureSpecs](https://www.scalatest.org/user_guide/selecting_a_style) powered by  [WebBrowser](https://www.scalatest.org/scaladoc/plus-selenium-2.45/3.1.1.0/org/scalatestplus/selenium/WebBrowser.html).. This setup allows the final test report to serve not just as a validation artifact, but also as living documentation of the entire application.
 
-that captures all screenshots taken during automated tests of a web application.
-To enable this, the reporter should be used alongside [FeatureSpecs](https://www.scalatest.org/user_guide/selecting_a_style) powered by [WebBrowser](https://www.scalatest.org/scaladoc/plus-selenium-2.45/3.1.1.0/org/scalatestplus/selenium/WebBrowser.html).
-This setup allows the final test report to serve not just as a validation artifact, but also as living documentation of the entire application.
+Now, imagine extending this concept further: in addition to screenshots, the reporter could also collect the HTML source code of each page rendered during testing. By indexing this source code, users could search and explore the test reports to discover where specific concepts (e.g., feature X, component Y, or behavior Z) appear throughout the app. This would make the test report an invaluable knowledge base for all stakeholders — including business analysts, testers, developers, and even new team members.
 
-Now, imagine extending this concept further: in addition to screenshots, the reporter could also collect the HTML source code of each page rendered during testing.
-By indexing this source code, users could search and explore the test reports to discover where specific concept (e.g., feature X, component Y, or behavior Z) appears throughout the app. This would make the test report an invaluable knowledge base for all stakeholders — including business analysts, testers, developers, and even new team members.
+In a microservices-based system, this idea could go even further. During test execution, the reporter could capture and correlate the messages exchanged between services, using that data to automatically generate a sequence diagram. This visualisation would make it much easier to follow and understand the flow of messages, giving developers and testers clear insight into how services interact under different test scenarios.
+
+On top of that, an AI-powered analysis could be run against the test artifact to deduce the application’s behaviour, detect gaps in coverage, and even identify inconsistencies between what the tests cover and what the business expects. This would transform test reports into not just a development tool, but an intelligent assistant that helps teams continuously understand and improve their systems.
 
 You wouldn’t need deep familiarity with the app — the test report itself would explain how the application behaves, assuming tests are written to cover key functionality as they should be.
 

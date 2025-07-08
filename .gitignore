@@ -6,3 +6,4 @@ target/
 /test_dir_created_during_test/
 /tests_reports/
 /ReportBuilderImplSpec/
+/test_report_root/

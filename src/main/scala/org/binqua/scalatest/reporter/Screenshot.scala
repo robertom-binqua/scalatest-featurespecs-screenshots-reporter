@@ -19,7 +19,7 @@ object Screenshot {
 }
 
 case class Screenshot(screenshotDriverData: ScreenshotDriverData, ordinal: Ordinal, index: Int) extends WithId {
-  val id: String = Utils.ordinalToString("ss", ordinal)
+  val id: String = Utils.idBuilder("ss", index.toString)
 
   val screenshotExternalData: ScreenshotExternalData = screenshotDriverData.screenshotExternalData
 

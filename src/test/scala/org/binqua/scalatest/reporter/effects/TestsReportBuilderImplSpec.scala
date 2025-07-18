@@ -40,13 +40,13 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |          "id" : "f_1_0",
                          |          "scenarios" : [
                          |            {
-                         |              "ordinal" : "s_1_0",
                          |              "description" : "s1",
                          |              "startedTimestamp" : 2,
                          |              "finishedTimestamp" : 3,
                          |              "screenshots" : [
                          |              ],
-                         |              "testOutcome" : "succeeded"
+                         |              "testOutcome" : "succeeded",
+                         |              "id" : "s_1_0"
                          |            }
                          |          ]
                          |        }
@@ -61,13 +61,13 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |          "id" : "f_1_1",
                          |          "scenarios" : [
                          |            {
-                         |              "ordinal" : "s_1_1",
                          |              "description" : "s1",
                          |              "startedTimestamp" : 2,
                          |              "finishedTimestamp" : 3,
                          |              "screenshots" : [
                          |              ],
-                         |              "testOutcome" : "succeeded"
+                         |              "testOutcome" : "succeeded",
+                         |              "id" : "s_1_1"
                          |            }
                          |          ]
                          |        }
@@ -110,7 +110,6 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |          "id" : "f_1_0",
                          |          "scenarios" : [
                          |            {
-                         |              "ordinal" : "s_1_0",
                          |              "description" : "s1",
                          |              "startedTimestamp" : 2,
                          |              "finishedTimestamp" : 3,
@@ -125,7 +124,8 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |                  "screenshotMoment" : "ON_EXIT_PAGE"
                          |                }
                          |              ],
-                         |              "testOutcome" : "succeeded"
+                         |              "testOutcome" : "succeeded",
+                         |              "id" : "s_1_0"
                          |            }
                          |          ]
                          |        }
@@ -140,7 +140,6 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |          "id" : "f_1_1",
                          |          "scenarios" : [
                          |            {
-                         |              "ordinal" : "s_1_1",
                          |              "description" : "s1",
                          |              "startedTimestamp" : 2,
                          |              "finishedTimestamp" : 3,
@@ -155,7 +154,8 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |                  "screenshotMoment" : "ON_EXIT_PAGE"
                          |                }
                          |              ],
-                         |              "testOutcome" : "succeeded"
+                         |              "testOutcome" : "succeeded",
+                         |              "id" : "s_1_1"
                          |            }
                          |          ]
                          |        }

@@ -20,7 +20,10 @@ case class Scenario(
 
 object Scenario {
   implicit val ordinalEncoder: Encoder[Ordinal] = (ordinal: Ordinal) => Json.fromString(ordinal.toList.mkString("s_", "_", ""))
-  implicit val encoder: Encoder[Scenario] = deriveEncoder[Scenario].mapJson(_.dropNullValues)
+  implicit val encoder: Encoder[Scenario] = new Encoder[Scenario] {
+    val internalEncoder: Encoder[Scenario] = deriveEncoder[Scenario].mapJson(_.dropNullValues)
+    override def apply(a: Scenario): Json = internalEncoder.apply(a).mapObject(r => r.add("id", Json.fromString(a.id)).remove("ordinal"))
+  }
   implicit val throwableEncoder: Encoder[Throwable] = (a: Throwable) => Json.obj("exception-message" -> Json.fromString(a.getMessage))
 
   def starting(ordinal: Ordinal, name: String, timestamp: Long): Scenario =

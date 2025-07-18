@@ -56,13 +56,12 @@ case class Scenarios(scenariosMap: Map[String, Scenario]) {
     }
 
   def withNewScreenshot(
-      ordinal: Ordinal,
       scenarioDescription: String,
       screenshotExternalData: ScreenshotDriverData
   ): Either[String, (Scenarios, Screenshot)] =
     scenariosMap
       .get(scenarioDescription)
-      .toRight("last scenario does not have testOutcome == STARTING")
+      .toRight(s"There is no scenario with description $scenarioDescription")
       .flatMap(lastScenario =>
         if (lastScenario.testOutcome == TestOutcome.STARTING) {
           val (updatedScenario, screenshot) = Scenario.addScreenshot(lastScenario, screenshotExternalData)

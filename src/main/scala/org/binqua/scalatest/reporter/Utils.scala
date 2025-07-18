@@ -15,6 +15,8 @@ object Utils {
       case _                                         => s"could not find pattern $FeatureScenarioPattern in $suiteClassName".asLeft
     }
 
-  def ordinalToString(prefix: String, ordinal: Ordinal): String = s"${prefix}_${ordinal.toList.mkString("_")}"
+  def ordinalToString(prefix: String, ordinal: Ordinal): String = idBuilder(prefix, ordinal.toList.mkString("_"))
+
+  def idBuilder(prefix: String, suffix: String): String = s"${prefix}_$suffix"
 
 }

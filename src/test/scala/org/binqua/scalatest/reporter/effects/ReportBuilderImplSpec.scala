@@ -37,7 +37,8 @@ class ReportBuilderImplSpec extends CatsEffectSuite {
       "/report-root/at_18_Feb_2021_at_13_01_02/report/screenshots/scenario_ordinal_1_1/sources/1_ON_EXIT_PAGE.txt",
       "/report-root/at_18_Feb_2021_at_13_01_02/report/screenshots/scenario_ordinal_1_1/withNoHtml",
       "/report-root/at_18_Feb_2021_at_13_01_02/report/screenshots/scenario_ordinal_1_1/withNoHtml/1_ON_EXIT_PAGE.txt",
-      "/report-root/at_18_Feb_2021_at_13_01_02/report/testsReport.json"
+      "/report-root/at_18_Feb_2021_at_13_01_02/report/testsReport.json",
+      "/report-root/at_18_Feb_2021_at_13_01_02/report/lunrDocument.json"
     ).sorted
 
     val runningScenarioTest1 = RunningScenario(ordinal = new Ordinal(1), test = "t1", feature = "f1", scenario = "s1")

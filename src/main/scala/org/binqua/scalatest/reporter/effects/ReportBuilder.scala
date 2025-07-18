@@ -4,8 +4,9 @@ import cats.effect.Async
 import cats.instances.unit
 import cats.syntax.all._
 import fs2.io.file.{Files, Path}
+import io.circe.syntax.EncoderOps
+import org.binqua.scalatest.reporter._
 import org.binqua.scalatest.reporter.util.utils
-import org.binqua.scalatest.reporter.{Screenshot, StateEvent, TestsReport, TestsReportBuilder}
 import org.jsoup.Jsoup
 
 trait ReportBuilder[F[_]] {
@@ -31,7 +32,7 @@ class ReportBuilderImpl[F[_]: Async](
     testsReportBuilder: TestsReportBuilder
 ) extends ReportBuilder[F] {
 
-  def build(events: List[StateEvent]): F[Unit] = {
+  def build(events: List[StateEvent]): F[Unit] =
     for {
       validReport <- testsReportBuilder.validateEvents(events) match {
         case Left(error: String) => Async[F].raiseError(new RuntimeException(error))
@@ -40,18 +41,26 @@ class ReportBuilderImpl[F[_]: Async](
       configuration <- rootReportInitializer.createRoot()
       _ <- buildTestsReport(validReport, configuration)
     } yield unit
-  }
 
   private def buildTestsReport(events: TestsReport, configuration: TestsCollectorConfiguration): F[Unit] = {
-    val result = reportJsonBuilder.build(events, configuration) ++
-      filesBuilder(extractFilesInfo(events), configuration) ++
+    val result: fs2.Stream[F, Unit] = reportJsonBuilder.build(events, configuration) ++
+      screenshots(extractFilesInfo(events), configuration) ++
+      jsLunrSearchDocument(events, configuration) ++
       fullReactProjectBuilder(events)
     result.compile.drain
   }
 
+  private def jsLunrSearchDocument(events: TestsReport, configuration: TestsCollectorConfiguration): fs2.Stream[F, Unit] = {
+    fs2.Stream
+      .emit(utils.toLunrDocument(events).asJson.spaces2)
+      .covary[F]
+      .through(Files[F].writeUtf8(configuration.lunrReportLocation))
+      .void
+  }
+
   private def fullReactProjectBuilder(events: TestsReport): fs2.Stream[F, Unit] = fs2.Stream.unit
 
-  private def filesBuilder(screenshots: List[Screenshot], reportDestination: TestsCollectorConfiguration): fs2.Stream[F, Unit] =
+  private def screenshots(screenshots: List[Screenshot], reportDestination: TestsCollectorConfiguration): fs2.Stream[F, Unit] =
     fs2.Stream
       .emits(screenshots)
       .covary[F]
@@ -92,10 +101,10 @@ class ReportBuilderImpl[F[_]: Async](
 
   private def extractFilesInfo(events: TestsReport): List[Screenshot] =
     for {
-      tests <- events.tests.values.toList
-      features <- tests.features.featuresMap.values
-      scenarios <- features.scenarios.scenariosMap.values
-      screenshots <- scenarios.screenshots
-    } yield screenshots
+      test <- events.tests.values.toList
+      feature <- test.features.featuresMap.values
+      scenario <- feature.scenarios.scenariosMap.values
+      screenshot <- scenario.screenshots
+    } yield screenshot
 
 }

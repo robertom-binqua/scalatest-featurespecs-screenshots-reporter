@@ -11,6 +11,7 @@ trait WebDriverTestsCollector {
 
 trait ReporterTestsCollector {
   def add(event: StateEvent): List[StateEvent]
+  def clear(): Unit
 }
 
 trait TestsCollector extends WebDriverTestsCollector with ReporterTestsCollector
@@ -91,4 +92,14 @@ final class TestsCollectorImpl extends TestsCollector {
     case _                                       => false
   }
 
+  override def clear(): Unit = {
+    lock.lock();
+    try {
+      lastEvent = None
+      events = Vector.empty
+      keepReadingAllEvents = true
+    } finally {
+      lock.unlock()
+    }
+  }
 }

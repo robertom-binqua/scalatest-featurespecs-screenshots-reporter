@@ -63,7 +63,7 @@ object Features {
       .toRight("there are not features. I cannot add a screenshot")
       .flatMap(feature =>
         feature
-          .withNewScreenshot(ordinal, scenarioDescription, screenshotExternalData)
+          .withNewScreenshot(scenarioDescription, screenshotExternalData)
           .map((result: (Feature, Screenshot)) => {
             val (updateFeature, screenshotLocation) = result
             (Features(features.featuresMap.updated(featureDescription, updateFeature)), screenshotLocation)

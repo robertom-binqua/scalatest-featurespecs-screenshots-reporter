@@ -23,9 +23,9 @@ case class Feature(description: String, scenarios: Scenarios, ordinal: Ordinal) 
     .testStarting(ordinal, scenarioDescription, timestamp)
     .map(newScenarios => this.copy(scenarios = newScenarios))
 
-  def withNewScreenshot(ordinal: Ordinal, scenarioDescription: String, screenshotExternalData:ScreenshotDriverData): Either[String, (Feature, Screenshot)] =
+  def withNewScreenshot(scenarioDescription: String, screenshotExternalData:ScreenshotDriverData): Either[String, (Feature, Screenshot)] =
     scenarios
-      .withNewScreenshot(ordinal, scenarioDescription, screenshotExternalData)
+      .withNewScreenshot(scenarioDescription, screenshotExternalData)
       .map((newScenarios: (Scenarios, Screenshot)) => {
         val (updatedScenarios, screenshot) = newScenarios
         (this.copy(scenarios = updatedScenarios), screenshot)

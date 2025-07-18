@@ -2,7 +2,7 @@ package org.binqua.scalatest.tategallery
 
 import org.binqua.scalatest.web.{ConfiguredChrome, WithScreenshotsSupport}
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
-import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
 import org.scalatest.GivenWhenThen
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should
@@ -10,7 +10,7 @@ import org.scalatest.matchers.should
 import java.time.Duration
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 
-class TateExampleSpec extends AnyFeatureSpec with should.Matchers with ConfiguredChrome with GivenWhenThen with WithScreenshotsSupport{
+class TateExampleSpec extends AnyFeatureSpec with should.Matchers with ConfiguredChrome with GivenWhenThen with WithScreenshotsSupport {
 
   Feature("feature 1") {
 
@@ -65,22 +65,22 @@ class TateExampleSpec extends AnyFeatureSpec with should.Matchers with Configure
       pageTitle should be("Tate")
 
       note("and given we accept to proceed")
-      takeAScreenshot(click on NavigationLinks.accept())
+      takeAScreenshot(clickViaJavaScript(NavigationLinks.accept()))
 
       note("and given we want to become a member")
-      takeAScreenshot(click on NavigationLinks.becomeAMember())
+      takeAScreenshot(clickViaJavaScript(NavigationLinks.becomeAMember()))
 
       note("and given we are absolutely sure to continue")
-      takeAScreenshot(click on NavigationLinks.continue())
+      takeAScreenshot(clickViaJavaScript(NavigationLinks.continue()))
 
       note("after we select no gift aid")
-      takeAScreenshot(click on NavigationLinks.noGifAid())
+      takeAScreenshot((clickViaJavaScript(NavigationLinks.noGifAid())))
 
       note("we can add the purchase to the basket")
-      takeAScreenshot(click on NavigationLinks.addToBasket())
+      takeAScreenshot(clickViaJavaScript(NavigationLinks.addToBasket()))
 
       note("and secure checkout the basket")
-      takeAScreenshot(click on NavigationLinks.secureCheckout())
+      takeAScreenshot(clickViaJavaScript(NavigationLinks.secureCheckout()))
 
       val wait = new WebDriverWait(webDriver, Duration.ofSeconds(10))
       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Continue']")))
@@ -89,28 +89,33 @@ class TateExampleSpec extends AnyFeatureSpec with should.Matchers with Configure
 
   }
 
+  private def clickViaJavaScript(element: WebElement): Unit = {
+    (webDriver.asInstanceOf[JavascriptExecutor].executeScript("arguments[0].click();", element))
+  }
+
   object NavigationLinks {
-    def continue()(implicit webDriver:WebDriver): WebElement = {
+    def continue()(implicit webDriver: WebDriver): WebElement = {
       webDriver.findElement(By.xpath("//button[contains(.,'Continue')]"))
     }
 
-     def becomeAMember()(implicit webDriver:WebDriver): WebElement = {
-       webDriver.findElements(By.xpath("//*[contains(text(), 'Become a Member')]")).asScala.toArray.toList.last
+    def becomeAMember()(implicit webDriver: WebDriver): WebElement = {
+      webDriver.findElements(By.xpath("//*[contains(text(), 'Become a Member')]")).asScala.toArray.toList.last
     }
 
-     def accept()(implicit webDriver:WebDriver): WebElement = {
+    def accept()(implicit webDriver: WebDriver): WebElement = {
       webDriver.findElement(By.xpath("//*[contains(text(), 'I Accept')]"))
     }
 
-    def noGifAid()(implicit webDriver:WebDriver): WebElement = {
-      webDriver.findElement(By.xpath("//input[@id='form--dont-add-gift__radio-example']"))
+    def noGifAid()(implicit webDriver: WebDriver): WebElement = {
+      val wait = new WebDriverWait(webDriver, Duration.ofSeconds(10))
+      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='form--dont-add-gift__radio-example']")))
     }
 
-    def addToBasket()(implicit webDriver:WebDriver): WebElement = {
+    def addToBasket()(implicit webDriver: WebDriver): WebElement = {
       webDriver.findElement(By.xpath("//button[@data-label='Add To Basket']"))
     }
 
-    def secureCheckout()(implicit webDriver:WebDriver): WebElement = {
+    def secureCheckout()(implicit webDriver: WebDriver): WebElement = {
       webDriver.findElement(By.xpath("//button[@name='dwfrm_cart_checkoutCart']"))
     }
   }

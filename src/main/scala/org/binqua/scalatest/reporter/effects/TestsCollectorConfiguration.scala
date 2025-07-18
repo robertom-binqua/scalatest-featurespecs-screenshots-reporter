@@ -28,5 +28,6 @@ object TestsCollectorConfiguration {
 
 abstract sealed case class TestsCollectorConfiguration(private val reportPath: Path, val screenshotsRootLocation: Path) {
   val jsonReportLocation: Path = reportPath / "testsReport.json"
+  val lunrReportLocation: Path = reportPath / "lunrDocument.json"
   val screenshotsLocationPrefix: String
 }

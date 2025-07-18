@@ -44,6 +44,7 @@ class IntegrationSpec extends CatsEffectSuite {
     val expectedFilesToBeGenerated: List[String] = List(
       "report",
       "report/testsReport.json",
+      "report/lunrDocument.json",
       "report/screenshots",
       "report/screenshots/scenario_ordinal_1_3",
       "report/screenshots/scenario_ordinal_1_3/original",
@@ -114,7 +115,7 @@ class IntegrationSpec extends CatsEffectSuite {
     )
 
     val expectedFilesToBeGenerated: List[String] =
-      (List("report", "report/testsReport.json", "report/screenshots") :::
+      (List("report", "report/testsReport.json", "report/lunrDocument.json", "report/screenshots") :::
         List(3, 22, 43, 62, 83, 102)
           .flatMap(partOfOrdinal => filesToBeGeneratedFromOrdinalSuffix(partOfOrdinal))).sorted
 

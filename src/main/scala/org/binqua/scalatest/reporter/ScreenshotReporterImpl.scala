@@ -23,24 +23,20 @@ class ScreenshotReporterRunner extends Reporter {
 
 class ScreenshotReporterImpl(testsCollector: ReporterTestsCollector, reportBuilder: ReportBuilder[IO]) extends Reporter {
 
-  override def apply(event: Event): Unit = {
-
+  override def apply(event: Event): Unit =
     toInternalEvent(event) match {
-
       case EventIgnored(originalEvent) =>
         println(s"originalEvent ignored : $originalEvent")
-
       case completed: StateEvent.RunCompleted =>
+        println(s"completed : $completed")
         val stateEvents = testsCollector.add(completed)
+        testsCollector.clear()
         reportBuilder.build(stateEvents).unsafeRunSync()(cats.effect.unsafe.implicits.global)
-
       case event =>
         testsCollector.add(event)
-
     }
-  }
 
-  private def toInternalEvent(event: Event): StateEvent = {
+  private def toInternalEvent(event: Event): StateEvent =
     event match {
       case runStarting: RunStarting =>
         StateEvent.RunStarting(runStarting.timeStamp)
@@ -84,8 +80,7 @@ class ScreenshotReporterImpl(testsCollector: ReporterTestsCollector, reportBuild
         StateEvent.RunCompleted(runCompleted.timeStamp)
 
       case e =>
-        EventIgnored(e.toString)
+        StateEvent.EventIgnored(e.toString)
 
     }
-  }
 }

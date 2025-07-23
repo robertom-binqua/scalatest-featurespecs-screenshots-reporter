@@ -12,7 +12,7 @@ object Screenshot {
       "sourceLocation" -> Json.fromString(screenshot.sourceCodeFilename.toString),
       "sourceWithNoHtmlLocation" -> Json.fromString(screenshot.sourceWithNoHtmlFilename.toString),
       "pageUrl" -> Json.fromString(screenshot.screenshotExternalData.pageUrl),
-      "index" -> Json.fromInt(screenshot.index),
+      "id" -> Json.fromString(screenshot.id),
       "pageTitle" -> Json.fromString(screenshot.screenshotExternalData.pageTitle),
       "screenshotMoment" -> Json.fromString(screenshot.screenshotExternalData.screenshotMoment.toString)
     )

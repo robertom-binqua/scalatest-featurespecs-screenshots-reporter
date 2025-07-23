@@ -65,22 +65,22 @@ class TateExampleSpec extends AnyFeatureSpec with should.Matchers with Configure
       pageTitle should be("Tate")
 
       note("and given we accept to proceed")
-      takeAScreenshot(clickViaJavaScript(NavigationLinks.accept()))
+      takeAScreenshot(click on NavigationLinks.accept())
 
       note("and given we want to become a member")
-      takeAScreenshot(clickViaJavaScript(NavigationLinks.becomeAMember()))
+      takeAScreenshot(click on NavigationLinks.becomeAMember())
 
       note("and given we are absolutely sure to continue")
-      takeAScreenshot(clickViaJavaScript(NavigationLinks.continue()))
+      takeAScreenshot(click on NavigationLinks.continue())
 
       note("after we select no gift aid")
-      takeAScreenshot((clickViaJavaScript(NavigationLinks.noGifAid())))
+      takeAScreenshot((click on NavigationLinks.noGifAid()))
 
       note("we can add the purchase to the basket")
-      takeAScreenshot(clickViaJavaScript(NavigationLinks.addToBasket()))
+      takeAScreenshot(click on NavigationLinks.addToBasket())
 
       note("and secure checkout the basket")
-      takeAScreenshot(clickViaJavaScript(NavigationLinks.secureCheckout()))
+      takeAScreenshot(click on NavigationLinks.secureCheckout())
 
       val wait = new WebDriverWait(webDriver, Duration.ofSeconds(10))
       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Continue']")))
@@ -107,16 +107,21 @@ class TateExampleSpec extends AnyFeatureSpec with should.Matchers with Configure
     }
 
     def noGifAid()(implicit webDriver: WebDriver): WebElement = {
-      val wait = new WebDriverWait(webDriver, Duration.ofSeconds(10))
+      val wait = new WebDriverWait(webDriver, Duration.ofSeconds(3))
       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='form--dont-add-gift__radio-example']")))
     }
 
     def addToBasket()(implicit webDriver: WebDriver): WebElement = {
-      webDriver.findElement(By.xpath("//button[@data-label='Add To Basket']"))
+      val wait = new WebDriverWait(webDriver, Duration.ofSeconds(3))
+      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-label='Add To Basket']")))
     }
 
     def secureCheckout()(implicit webDriver: WebDriver): WebElement = {
-      webDriver.findElement(By.xpath("//button[@name='dwfrm_cart_checkoutCart']"))
+      webDriver.findElement(By.xpath("//button[@value='Checkout']"))
+    }
+
+    def continueAfterEmail()(implicit webDriver: WebDriver): WebElement = {
+      webDriver.findElement(By.xpath("//button[@name='dwfrm_checkoutlogin_continue']"))
     }
   }
 

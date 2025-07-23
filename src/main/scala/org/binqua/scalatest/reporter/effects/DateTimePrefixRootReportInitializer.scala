@@ -5,9 +5,7 @@ import cats.implicits._
 import fs2.io.file.Path
 
 trait RootReportInitializer[F[_]] {
-
   def createRoot(): F[TestsCollectorConfiguration]
-
 }
 
 class DateTimePrefixRootReportInitializer[F[_]: Async](clock: Clock[F]) extends RootReportInitializer[F] {
@@ -30,4 +28,5 @@ class DateTimePrefixRootReportInitializer[F[_]: Async](clock: Clock[F]) extends 
     instant <- clock.realTimeInstant
     configuration <- TestsCollectorConfiguration.from[F](instant, reportDestinationRoot)
   } yield configuration
+
 }

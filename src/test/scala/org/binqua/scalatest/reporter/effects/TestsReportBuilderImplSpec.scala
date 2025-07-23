@@ -29,7 +29,7 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
     )
 
     val expectedJson = """{
-                         |  "screenshotsLocationPrefix" : "report/screenshots",
+                         |  "screenshotsLocationPrefix" : "report/screenshots/",
                          |  "testsReport" : [
                          |    {
                          |      "name" : "t1",
@@ -99,7 +99,7 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
     )
 
     val expectedJson = """{
-                         |  "screenshotsLocationPrefix" : "report/screenshots",
+                         |  "screenshotsLocationPrefix" : "report/screenshots/",
                          |  "testsReport" : [
                          |    {
                          |      "name" : "t1",
@@ -119,7 +119,7 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |                  "sourceLocation" : "scenario_ordinal_1_0/sources/1_ON_EXIT_PAGE.txt",
                          |                  "sourceWithNoHtmlLocation" : "scenario_ordinal_1_0/withNoHtml/1_ON_EXIT_PAGE.txt",
                          |                  "pageUrl" : "url1",
-                         |                  "index" : 1,
+                         |                  "id" : "ss_1",
                          |                  "pageTitle" : "title 1",
                          |                  "screenshotMoment" : "ON_EXIT_PAGE"
                          |                }
@@ -149,7 +149,7 @@ class TestsReportBuilderImplSpec extends CatsEffectSuite {
                          |                  "sourceLocation" : "scenario_ordinal_1_1/sources/1_ON_EXIT_PAGE.txt",
                          |                  "sourceWithNoHtmlLocation" : "scenario_ordinal_1_1/withNoHtml/1_ON_EXIT_PAGE.txt",
                          |                  "pageUrl" : "url1",
-                         |                  "index" : 1,
+                         |                  "id" : "ss_1",
                          |                  "pageTitle" : "title 1",
                          |                  "screenshotMoment" : "ON_EXIT_PAGE"
                          |                }

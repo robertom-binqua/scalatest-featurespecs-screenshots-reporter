@@ -1,4 +1,4 @@
-package org.binqua.scalatest.reporter.effects
+package org.binqua.scalatest.reporter
 
 import io.circe.Encoder
 import io.circe.generic.semiauto.deriveEncoder

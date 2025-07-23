@@ -16,7 +16,7 @@ object TestsCollectorConfiguration {
     for {
       _ <- Files[F].createDirectories(screenshotsPath)
     } yield new TestsCollectorConfiguration(reportPath, screenshotsPath) {
-      override val screenshotsLocationPrefix: String = s"$reportPathName/$screenshotsPathName"
+      override val screenshotsLocationPrefix: String = s"$reportPathName/$screenshotsPathName/"
     }
   }
 

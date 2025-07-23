@@ -13,6 +13,7 @@ class ScreenshotReporterRunner extends Reporter {
     val rootReportInitializer = new DateTimePrefixRootReportInitializer[IO](Clock[IO])
     val reportJsonBuilder = new StreamReportJsonBuilder[IO]()
     val testsReportBuilder = new TestsReportBuilderImpl()
+
     val reportBuilder: ReportBuilderImpl[IO] = new ReportBuilderImpl[IO](rootReportInitializer, reportJsonBuilder, testsReportBuilder)
 
     new ScreenshotReporterImpl(TestsCollector.reporterTestsCollector, reportBuilder)
@@ -29,9 +30,8 @@ class ScreenshotReporterImpl(testsCollector: ReporterTestsCollector, reportBuild
         println(s"originalEvent ignored : $originalEvent")
       case completed: StateEvent.RunCompleted =>
         println(s"completed : $completed")
-        val stateEvents = testsCollector.add(completed)
+        reportBuilder.build(events = testsCollector.add(completed)).unsafeRunSync()(cats.effect.unsafe.implicits.global)
         testsCollector.clear()
-        reportBuilder.build(stateEvents).unsafeRunSync()(cats.effect.unsafe.implicits.global)
       case event =>
         testsCollector.add(event)
     }

@@ -144,7 +144,7 @@ class TestsReportSpec extends FunSuite {
         |                "sourceLocation" : "scenario_ordinal_1_0/sources/1_ON_EXIT_PAGE.txt",
         |                "sourceWithNoHtmlLocation" : "scenario_ordinal_1_0/withNoHtml/1_ON_EXIT_PAGE.txt",
         |                "pageUrl" : "url1",
-        |                "index" : 1,
+        |                "id" : "ss_1",
         |                "pageTitle" : "title 1",
         |                "screenshotMoment" : "ON_EXIT_PAGE"
         |              },
@@ -153,7 +153,7 @@ class TestsReportSpec extends FunSuite {
         |                "sourceLocation" : "scenario_ordinal_1_0/sources/2_ON_ENTER_PAGE.txt",
         |                "sourceWithNoHtmlLocation" : "scenario_ordinal_1_0/withNoHtml/2_ON_ENTER_PAGE.txt",
         |                "pageUrl" : "url2",
-        |                "index" : 2,
+        |                "id" : "ss_2",
         |                "pageTitle" : "title 2",
         |                "screenshotMoment" : "ON_ENTER_PAGE"
         |              }
@@ -190,7 +190,7 @@ class TestsReportSpec extends FunSuite {
         |                "sourceLocation" : "scenario_ordinal_2_0/sources/1_ON_EXIT_PAGE.txt",
         |                "sourceWithNoHtmlLocation" : "scenario_ordinal_2_0/withNoHtml/1_ON_EXIT_PAGE.txt",
         |                "pageUrl" : "url3",
-        |                "index" : 1,
+        |                "id" : "ss_1",
         |                "pageTitle" : "title 3",
         |                "screenshotMoment" : "ON_EXIT_PAGE"
         |              },
@@ -199,7 +199,7 @@ class TestsReportSpec extends FunSuite {
         |                "sourceLocation" : "scenario_ordinal_2_0/sources/2_ON_ENTER_PAGE.txt",
         |                "sourceWithNoHtmlLocation" : "scenario_ordinal_2_0/withNoHtml/2_ON_ENTER_PAGE.txt",
         |                "pageUrl" : "url4",
-        |                "index" : 2,
+        |                "id" : "ss_2",
         |                "pageTitle" : "title 4",
         |                "screenshotMoment" : "ON_ENTER_PAGE"
         |              }
@@ -273,7 +273,7 @@ class TestsReportSpec extends FunSuite {
         |                "sourceLocation" : "scenario_ordinal_1_0/sources/1_ON_EXIT_PAGE.txt",
         |                "sourceWithNoHtmlLocation" : "scenario_ordinal_1_0/withNoHtml/1_ON_EXIT_PAGE.txt",
         |                "pageUrl" : "url1",
-        |                "index" : 1,
+        |                "id" : "ss_1",
         |                "pageTitle" : "title 1",
         |                "screenshotMoment" : "ON_EXIT_PAGE"
         |              }
@@ -309,7 +309,7 @@ class TestsReportSpec extends FunSuite {
         |                "sourceLocation" : "scenario_ordinal_2_0/sources/1_ON_ENTER_PAGE.txt",
         |                "sourceWithNoHtmlLocation" : "scenario_ordinal_2_0/withNoHtml/1_ON_ENTER_PAGE.txt",
         |                "pageUrl" : "url2",
-        |                "index" : 1,
+        |                "id" : "ss_1",
         |                "pageTitle" : "title 2",
         |                "screenshotMoment" : "ON_ENTER_PAGE"
         |              }

@@ -53,7 +53,8 @@ object ReferenceData {
 
   val scenarioWithScreenshot: Scenario = ReferenceData.startingScenario.copy(screenshots = List(screenshot))
 
-  val feature: Feature = Feature("feature desc", Scenarios(scenariosMap = Map(scenarioWithScreenshot.description -> scenarioWithScreenshot)), scenarioWithScreenshot.ordinal)
+  val feature: Feature =
+    Feature("feature desc", Scenarios(scenariosMap = Map(scenarioWithScreenshot.description -> scenarioWithScreenshot)), scenarioWithScreenshot.ordinal)
 
   val test: Test = Test("test desc", Features(featuresMap = Map(feature.description -> feature)), scenario.ordinal)
 

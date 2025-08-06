@@ -1,0 +1,45 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="GovUkNavigationSpec with screenshots" type="ScalaTestRunConfiguration" factoryName="ScalaTest" singleton="false" show_console_on_std_err="false" show_console_on_std_out="false">
+    <module name="scalatest-featurespecs-screenshots-reporter" />
+    <extension name="net.ashald.envfile">
+      <option name="IS_ENABLED" value="false" />
+      <option name="IS_SUBST" value="false" />
+      <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+      <option name="IS_IGNORE_MISSING_FILES" value="false" />
+      <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+      <ENTRIES>
+        <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+      </ENTRIES>
+    </extension>
+    <option name="VMParameters" value="-Dtest_report_destination_root=roberto_test" />
+    <option name="allowRunningInParallel" value="true" />
+    <option name="alternativeJrePath" />
+    <option name="alternativeJrePathEnabled" value="false" />
+    <option name="classpathModifications">
+      <list />
+    </option>
+    <option name="envFilePaths">
+      <list />
+    </option>
+    <option name="envs">
+      <map />
+    </option>
+    <option name="passParentEnvs" value="true" />
+    <option name="programParameters" value="-C org.binqua.scalatest.reporter.ScreenshotReporterRunner" />
+    <option name="projectPathOnTarget" />
+    <option name="selectedOptions">
+      <list />
+    </option>
+    <option name="testKind" value="Class" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <option name="javaOptions" value="-Dtest_report_destination_root=roberto_test" />
+    <option name="programParameters" value="-C org.binqua.scalatest.reporter.ScreenshotReporterRunner" />
+    <option name="shortenClasspath" value="NONE" />
+    <option name="testArgs" value="-C org.binqua.scalatest.reporter.ScreenshotReporterRunner" />
+    <option name="testClassPath" value="org.binqua.scalatest.govuk.GovUkNavigationSpec" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

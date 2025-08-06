@@ -64,6 +64,7 @@ trait ConfiguredChrome extends WebBrowser with Driver with BeforeAndAfterAll {
     }
 
     override def afterAnyCall(target: AnyRef, method: Method, args: Array[AnyRef], result: AnyRef): Unit = {
+      Thread.sleep(100) // necessary to avoid strange screenshot effect, like page repetition
       if (method.toString.endsWith("org.openqa.selenium.WebElement.click()")) {
         testsCollector
           .addScreenshot(

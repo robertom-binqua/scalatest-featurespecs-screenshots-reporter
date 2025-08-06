@@ -1,7 +1,6 @@
 package org.binqua.scalatest.reporter.util
 
 import org.binqua.scalatest.reporter._
-import org.binqua.scalatest.reporter.effects.LunrDocumentEntry
 import org.jsoup.Jsoup
 
 object utils {

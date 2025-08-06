@@ -1,9 +1,8 @@
 package org.binqua.scalatest.reporter.util
 
 import munit.FunSuite
-import org.binqua.scalatest.reporter.ReferenceData
+import org.binqua.scalatest.reporter.{LunrDocumentEntry, ReferenceData}
 import org.binqua.scalatest.reporter.ReferenceData.screenshotDriverData
-import org.binqua.scalatest.reporter.effects.LunrDocumentEntry
 
 class utilsSpec extends FunSuite {
 
